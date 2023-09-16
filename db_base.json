@@ -1,0 +1,172 @@
+[
+    {
+        "table": "AuthUser",
+        "fields": [
+            {
+                "name": "id",
+                "type": "BIGINT",
+                "primary_key": true,
+                "nullable": true,
+                "autoincrement": true,
+                "unique": true
+            },
+            {
+                "name": "username",
+                "type": "String",
+                "nullable": true,
+                "unique": true,
+                "max_length": 80
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "primary_key": true,
+                "nullable": true,
+                "max_length": 64
+            },
+            {
+                "name": "password",
+                "type": "String",
+                "nullable": true,
+                "max_length": 512
+            },
+            {
+                "name": "created_id",
+                "type": "BIGINT",
+                "nullable": true
+            },
+            {
+                "name": "date_joined",
+                "type": "DateTime(timezone = True)",
+                "nullable": true,
+                "default": "datetime.datetime.utcnow"
+            },
+            {
+                "name": "current_session",
+                "type": "String",
+                "nullable": true,
+                "max_length": 80
+            },
+            {
+                "name": "status",
+                "type": "String",
+                "nullable": true,
+                "max_length": 1
+            },
+            {
+                "name": "change_password",
+                "type": "BOOLEAN",
+                "nullable": true,
+                "default": false
+            }
+        ],
+        "unique_together": [
+            "id",
+            "name"
+        ],
+        "constraint": []
+    },
+    {
+        "table": "role",
+        "fields": [
+            {
+                "name": "id",
+                "type": "BIGINT",
+                "primary_key": true,
+                "autoincrement": true,
+                "nullable": true
+            },
+            {
+                "name": "code",
+                "type":"String",
+                "nullable": true,
+                "unique": true,
+                "max_length": 48
+            },
+            {
+                "name": "name",
+                "type":"String",
+                "nullable": true,
+                "max_length": 48
+
+            },
+            {
+                "name": "realm_id",
+                "type":"BIGINT",
+                "nullable": true
+            },
+            {
+                "name": "remarks",
+                "type": "String",
+                "nullable": true,
+                "max_length": 255
+            },
+            {
+                "name": "remarks",
+                "type": "String",
+                "nullable": true,
+                "max_length": 255
+            }
+
+
+        ]
+    },
+    {
+        "table": "config",
+        "fields": [
+            {
+                "name": "id",
+                "type": "BIGINT",
+                "primary_key": true,
+                "autoincrement": true,
+                "nullable": false
+            },
+            {
+                "name": "realm_id",
+                "type": "BIGINT",
+                "nullable": false
+            },
+            {
+                "name": "authuser_id",
+                "type": "BIGINT",
+                "nullable": true
+            },
+            {
+                "name": "display_name",
+                "type": "String",
+                "nullable": true,
+                "max_length": 64
+            },
+            {
+                "name": "config_key",
+                "type": "String",
+                "nullable": true,
+                "max_length": 128
+            },
+            {
+                "name": "config_value",
+                "type": "String",
+                "nullable": true,
+                "max_length": 128
+            },
+            {
+                "name": "description",
+                "type": "String",
+                "nullable": true,
+                "max_length": 512
+            },
+            {
+                "name": "is_confidential",
+                "type": "BOOLEAN",
+                "nullable": true,
+                "max_length": 1,
+                "default": true
+            }
+        ],
+        "constraint": [
+            {
+                "unique_togheter": ["config_key", "realm_id", "authuser_id"]
+            }
+        ]
+    }
+]
